@@ -7,17 +7,25 @@ export const SingleResume = () => {
 
   const { resume, deleteResume } = useResume(id);
 
-    const handleDelete = async () => {
-      try {
-        await deleteResume(id); // Call the deleteResume function with the resume id
-        history.push("/"); // Redirect to home page or any other appropriate page
-      } catch (error) {
-        console.error("Error deleting resume:", error);
-        // Handle error if needed
-      }
-    };
+  const handleDelete = async () => {
+    try {
+      await deleteResume(id); 
+      history.push("/"); 
+    } catch (error) {
+      console.error("Error deleting resume:", error);
+    }
+  };
 
-  console.log(resume);
+  const handleDownload = () => {
+    const element = document.createElement("a");
+    const file = new Blob([JSON.stringify(resume)], {
+      type: "application/json",
+    });
+    element.href = URL.createObjectURL(file);
+    element.download = "resume.json";
+    document.body.appendChild(element); 
+    element.click();
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -73,7 +81,14 @@ export const SingleResume = () => {
       <div>
         <button
           type="button"
-          className="text-white ml-20 bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2"
+          onClick={handleDownload}
+          className="text-white ml-20 bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2"
+        >
+          Download
+        </button>
+        <button
+          type="button"
+          className="text-white ml-2 bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2"
         >
           Update
         </button>
@@ -90,7 +105,7 @@ export const SingleResume = () => {
       <Link to={"/home"}>
         <button
           type="button"
-          class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
+          className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
         >
           Back
         </button>
