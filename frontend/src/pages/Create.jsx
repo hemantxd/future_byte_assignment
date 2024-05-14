@@ -1,8 +1,8 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const Create = () => {
-    const[fullName, setFullName] =useState("")
+  const [fullName, setFullName] = useState("");
   const [summary, setSummary] = useState("");
   const [institution, setInstitution] = useState("");
   const [degree, setDegree] = useState("");
@@ -15,7 +15,7 @@ export const Create = () => {
 
     // resume object
     const resume = {
-        fullName,
+      fullName,
       summary,
       education: [{ institution, degree }],
       workExperience: [{ company, position }],
@@ -23,7 +23,6 @@ export const Create = () => {
     };
 
     try {
-      
       const response = await axios.post(
         "http://localhost:3000/api/v1/resume/create",
         resume,
@@ -37,7 +36,7 @@ export const Create = () => {
       const createdResumeId = response.data._id;
       console.log("Resume created:", createdResumeId);
       // Reset form fields
-      setFullName("")
+      setFullName("");
       setSummary("");
       setInstitution("");
       setDegree("");
@@ -50,90 +49,106 @@ export const Create = () => {
   };
 
   return (
-    <div className="h-screen flex items-center justify-center flex-col">
-      <h2>Create Resume</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
+    <div className="bg-slate-100 h-screen flex justify-center">
+      <div className="h-screen flex items-center justify-center flex-col">
+        <h2>Create Resume</h2>
+        <form onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="">Full Name</label>
+            <div>
+              <label htmlFor="">Full Name</label>
+              <input
+                className="bg-gray-50 border border-gray-300  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                type="text"
+                placeholder="enter your fullname here"
+                id=""
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+              />
+            </div>
+            <label htmlFor="summary">Summary:</label>
+            <input
+              type="text"
+              value={summary}
+              onChange={(e) => setSummary(e.target.value)}
+              id="first_name"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              placeholder="enter summary"
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="institution">Institution:</label>
             <input
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               type="text"
-              placeholder="enter your fullname here"
-              id=""
-              value={fullName}
-              onChange={(e) => setFullName(e.target.value)}
+              id="institution"
+              value={institution}
+              onChange={(e) => setInstitution(e.target.value)}
             />
           </div>
-          <label htmlFor="summary">Summary:</label>
-          <input
-            type="text"
-            value={summary}
-            onChange={(e) => setSummary(e.target.value)}
-            id="first_name"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="enter summary"
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="institution">Institution:</label>
-          <input
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-            type="text"
-            id="institution"
-            value={institution}
-            onChange={(e) => setInstitution(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="degree">Degree:</label>
-          <input
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-            type="text"
-            id="degree"
-            value={degree}
-            onChange={(e) => setDegree(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="company">Company:</label>
-          <input
-            type="text"
-            id="company"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-            value={company}
-            onChange={(e) => setCompany(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="position">Position:</label>
-          <input
-            type="text"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-            id="position"
-            value={position}
-            onChange={(e) => setPosition(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="skills">Skills:</label>
-          <input
-            type="text"
-            id="skills"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-            value={skills}
-            onChange={(e) => setSkills(e.target.value)}
-          />
-        </div>
-        
+          <div>
+            <label htmlFor="degree">Degree:</label>
+            <input
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              type="text"
+              id="degree"
+              value={degree}
+              onChange={(e) => setDegree(e.target.value)}
+            />
+          </div>
+          <div>
+            <label htmlFor="company">Company:</label>
+            <input
+              type="text"
+              id="company"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              value={company}
+              onChange={(e) => setCompany(e.target.value)}
+            />
+          </div>
+          <div>
+            <label htmlFor="position">Position:</label>
+            <input
+              type="text"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              id="position"
+              value={position}
+              onChange={(e) => setPosition(e.target.value)}
+            />
+          </div>
+          <div>
+            <label htmlFor="skills">Skills:</label>
+            <input
+              type="text"
+              id="skills"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              value={skills}
+              onChange={(e) => setSkills(e.target.value)}
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 mt-3"
+          >
+            Create Resume
+          </button>
+        </form>
+      </div>
+      <div className="flex flex-col justify-center ml-5">
         <button
-          type="submit"
-          className="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 mt-3"
+          type="button"
+          className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
         >
-          Create Resume
+          Start Listening
         </button>
-      </form>
+        <button
+          type="button"
+          className="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+        >
+          Stop Listening
+        </button>
+      </div>
     </div>
   );
 };
