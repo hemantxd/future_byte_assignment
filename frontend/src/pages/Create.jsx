@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export const Create = () => {
   const [fullName, setFullName] = useState("");
@@ -190,6 +191,14 @@ export const Create = () => {
           >
             Stop Listening
           </button>
+          <Link to={"/home"}>
+            <button
+              type="button"
+              class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
+            >
+              Back
+            </button>
+          </Link>
         </div>
         <div className="flex flex-col justify-center w-70">
           <div className="ml-10  bg-slate-400">
