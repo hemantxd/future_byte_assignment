@@ -7,7 +7,7 @@ export const useResume = (id) => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/api/v1/resume/${id}`, {
+      .get(`https://future-byte-assignment.onrender.com/api/v1/resume/${id}`, {
         headers: {
           Authorization: localStorage.getItem("token"),
         },
@@ -20,11 +20,14 @@ export const useResume = (id) => {
 
    const deleteResume = async (id) => {
     try {
-      await axios.delete(`http://localhost:3000/api/v1/resume/${id}`, {
-        headers: {
-          Authorization: localStorage.getItem("token"),
-        },
-      });
+      await axios.delete(
+        `https://future-byte-assignment.onrender.com/api/v1/resume/${id}`,
+        {
+          headers: {
+            Authorization: localStorage.getItem("token"),
+          },
+        }
+      );
       
       setResume({});
     } catch (error) {

@@ -65,7 +65,7 @@ export const Create = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/v1/resume/create",
+        "https://future-byte-assignment.onrender.com/api/v1/resume/create",
         resume,
         {
           headers: {
@@ -196,7 +196,7 @@ export const Create = () => {
               type="button"
               class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
             >
-              Back
+              Home
             </button>
           </Link>
         </div>

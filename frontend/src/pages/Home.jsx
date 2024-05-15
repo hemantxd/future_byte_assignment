@@ -9,7 +9,7 @@ export const Home = ({ userId }) => {
     const fetchResumes = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3000/api/v1/resume",
+          "https://future-byte-assignment.onrender.com/api/v1/resume",
           {
             headers: {
               Authorization: localStorage.getItem("token"),
