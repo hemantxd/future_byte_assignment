@@ -7,6 +7,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.get('/cron', (req, res)=>{
+    res.json({
+        msg: "bhaa"
+    })
+})
+
 app.use("/api/v1", rootRouter);
 
 app.listen(3000, ()=>{
